@@ -1,7 +1,8 @@
-package com.example.backbasecityfinder
+package com.example.backbasecityfinder.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.backbasecityfinder.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
