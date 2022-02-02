@@ -12,7 +12,7 @@ import com.example.backbasecityfinder.data.remote.dto.Coord
 import com.example.backbasecityfinder.databinding.CitySearchFragmentBinding
 
 
-class CitySearchFragment: Fragment(
+class CitySearchFragment : Fragment(
     R.layout.city_search_fragment
 ) {
     private lateinit var binding: CitySearchFragmentBinding
@@ -32,14 +32,12 @@ class CitySearchFragment: Fragment(
         }
         binding.listView.adapter = adapter
 
-        binding.searchField.addTextChangedListener {
-            sharedMainViewModel.cityCodeFilterRequest.postValue(it.toString())
-        }
+        initListeners()
+
         sharedMainViewModel.cityCodeRequest.postValue(Unit)
 
         sharedMainViewModel.run {
             cityCode.observe(viewLifecycleOwner) {
-                binding.searchField.visibility = View.VISIBLE
                 binding.progressLoader.visibility = View.GONE
                 adapter?.citiesList = it
             }
@@ -52,6 +50,18 @@ class CitySearchFragment: Fragment(
             cityCodeLoading.observe(viewLifecycleOwner) {
                 binding.progressLoader.visibility = View.VISIBLE
             }
+        }
+    }
+
+    private fun initListeners() {
+        binding.viewSearchBar.tvSearch.addTextChangedListener {
+            sharedMainViewModel.cityCodeFilterRequest.postValue(it.toString())
+            val icon = if (it.toString().isNotEmpty()) R.drawable.ic_close else R.drawable.ic_search
+            binding.viewSearchBar.imgSearch.setImageResource(icon)
+        }
+
+        binding.viewSearchBar.imgSearch.setOnClickListener {
+            binding.viewSearchBar.tvSearch.setText("")
         }
     }
 
