@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Backbase City Finder</string>
+    <string name="search_city">Search for a city</string>
 </resources>
