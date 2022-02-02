@@ -11,6 +11,8 @@ interface Service {
 
     suspend fun getCities(): List<City>
 
+    suspend fun getFetchedCities(): List<City>
+
     companion object {
         fun create(): Service {
             return ServiceImpl(

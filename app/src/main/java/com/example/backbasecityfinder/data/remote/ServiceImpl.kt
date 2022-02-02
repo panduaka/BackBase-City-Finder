@@ -9,9 +9,12 @@ class ServiceImpl(
     private val client: HttpClient
 ) : Service {
 
+    var cities = listOf<City>()
+
     override suspend fun getCities(): List<City> {
         return try {
-            client.get { url(HttpRoutes.POSTS) }
+            cities = client.get { url(HttpRoutes.POSTS) }
+            return cities
         } catch(e: RedirectResponseException) {
             // 3xx - responses
             println("Error: ${e.response.status.description}")
@@ -28,5 +31,9 @@ class ServiceImpl(
             println("Error: ${e.message}")
             emptyList()
         }
+    }
+
+    override suspend fun getFetchedCities(): List<City> {
+        return cities
     }
 }
