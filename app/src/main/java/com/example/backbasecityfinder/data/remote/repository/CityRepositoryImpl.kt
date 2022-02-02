@@ -10,4 +10,10 @@ class CityRepositoryImpl(
     override suspend fun getCities(): List<City> {
         return service.getCities()
     }
+
+    override suspend fun getFetchedCities(): List<City> {
+        return service.getFetchedCities()
+    }
+
+
 }

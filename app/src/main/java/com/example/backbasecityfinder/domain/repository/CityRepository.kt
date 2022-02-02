@@ -4,4 +4,6 @@ import com.example.backbasecityfinder.data.remote.dto.City
 
 interface CityRepository {
     suspend fun getCities():List<City>
+
+    suspend fun getFetchedCities(): List<City>
 }
