@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.backbasecityfinder.R
 import com.example.backbasecityfinder.data.remote.dto.City
 import com.example.backbasecityfinder.data.remote.dto.Coord
+import com.example.backbasecityfinder.domain.model.CityDomainModel
+import com.example.backbasecityfinder.domain.model.CoordDomainModel
 
 @Suppress("ComplexMethod")
 class CityAdapter(
-    private val onItemClickListener: ((Coord) -> Unit)? = null
+    private val onItemClickListener: ((CoordDomainModel) -> Unit)? = null
 ) : RecyclerView.Adapter<CityAdapter.ViewHolder>() {
-    var citiesList = listOf<City>()
+    var citiesList = listOf<CityDomainModel>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -38,12 +40,12 @@ class CityAdapter(
         private val cityTextView: TextView = itemView.findViewById(R.id.cityTextView)
 
         fun bindView(
-            city: City,
-            onItemClickListener: ((Coord) -> Unit)?
+            city: CityDomainModel,
+            onItemClickListener: ((CoordDomainModel) -> Unit)?
         ) {
-            cityTextView.text = "${city.name}, ${city.country}"
+            cityTextView.text = city.title
             cityTextView.setOnClickListener {
-                onItemClickListener?.invoke(city.coord)
+                onItemClickListener?.invoke(city.coordinates)
             }
         }
     }

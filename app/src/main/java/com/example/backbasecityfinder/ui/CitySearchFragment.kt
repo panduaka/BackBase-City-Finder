@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.example.backbasecityfinder.R
 import com.example.backbasecityfinder.data.remote.dto.Coord
 import com.example.backbasecityfinder.databinding.CitySearchFragmentBinding
+import com.example.backbasecityfinder.domain.model.CoordDomainModel
 
 
 class CitySearchFragment : Fragment(
@@ -22,7 +23,7 @@ class CitySearchFragment : Fragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = CitySearchFragmentBinding.bind(view)
-        adapter = CityAdapter() {
+        adapter = CityAdapter {
             val mapIntent = createLocationIntent(it)
             activity?.packageManager?.let { packageManager ->
                 mapIntent.resolveActivity(packageManager)?.let {
@@ -65,8 +66,8 @@ class CitySearchFragment : Fragment(
         }
     }
 
-    private fun createLocationIntent(coord: Coord): Intent {
-        val gmmIntentUri = Uri.parse("geo:${coord.lat},${coord.lon}")
+    private fun createLocationIntent(coord: CoordDomainModel): Intent {
+        val gmmIntentUri = Uri.parse("geo:${coord.latitude},${coord.longitude}")
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri).apply {
             setPackage("com.google.android.apps.maps")
         }

@@ -5,6 +5,7 @@ import com.example.backbasecityfinder.common.Resource
 import com.example.backbasecityfinder.data.remote.dto.City
 import com.example.backbasecityfinder.domain.interactors.GetCitiesUserCase
 import com.example.backbasecityfinder.domain.interactors.GetFilteredCitiesUserCase
+import com.example.backbasecityfinder.domain.model.CityDomainModel
 
 class MainViewModel(
     private val getCitiesUserCase: GetCitiesUserCase,
@@ -14,20 +15,20 @@ class MainViewModel(
     internal val cityCodeRequest = MutableLiveData<Unit>()
     internal val cityCodeFilterRequest = MutableLiveData<String>()
 
-    internal val cityCode: LiveData<List<City>> get() = _cityCode
-    internal val cityCodeFilter: LiveData<List<City>> get() = _cityFilterCode
+    internal val cityCode: LiveData<List<CityDomainModel>> get() = _cityCode
+    internal val cityCodeFilter: LiveData<List<CityDomainModel>> get() = _cityFilterCode
     internal val cityCodeLoading: LiveData<Unit> get() = _cityCodeLoading
 
-    private val _cityCode = MediatorLiveData<List<City>>()
-    private val _cityFilterCode = MediatorLiveData<List<City>>()
+    private val _cityCode = MediatorLiveData<List<CityDomainModel>>()
+    private val _cityFilterCode = MediatorLiveData<List<CityDomainModel>>()
     private val _cityCodeLoading = MediatorLiveData<Unit>()
 
-    private val cityCodeResult: LiveData<Resource<List<City>>> =
+    private val cityCodeResult: LiveData<Resource<List<CityDomainModel>>> =
         Transformations.switchMap(cityCodeRequest) {
             getCitiesUserCase.execute()
         }
 
-    private val cityFilterCodeResult: LiveData<Resource<List<City>>> =
+    private val cityFilterCodeResult: LiveData<Resource<List<CityDomainModel>>> =
         Transformations.switchMap(cityCodeFilterRequest) {
             getFilteredCitiesUserCase.execute(it)
         }
