@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:background="@drawable/bg_overview_item"
+    android:layout_marginTop="@dimen/gap_min"
+    android:layout_marginBottom="@dimen/gap_min"
+    android:paddingStart="@dimen/gap_1"
+    android:paddingEnd="@dimen/gap_1"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/cityTextView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Sydney"
-        android:padding="16dp" />
-</LinearLayout>
+        android:layout_marginTop="@dimen/gap_1"
+        android:textAppearance="@style/TextAppearance.Title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Text"/>
+
+    <ImageView
+        android:id="@+id/imgLocation"
+        android:src="@drawable/ic_location"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/coordinatesTextView"
+        app:layout_constraintBottom_toBottomOf="@id/coordinatesTextView"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/coordinatesTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/gap_1"
+        android:textAppearance="@style/TextAppearance.SubTitle"
+        app:layout_constraintTop_toBottomOf="@id/cityTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgLocation"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="Text"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

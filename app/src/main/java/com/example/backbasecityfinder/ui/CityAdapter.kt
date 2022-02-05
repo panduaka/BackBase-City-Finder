@@ -38,12 +38,15 @@ class CityAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val cityTextView: TextView = itemView.findViewById(R.id.cityTextView)
+        private val coordinatesTextView: TextView = itemView.findViewById(R.id.coordinatesTextView)
 
         fun bindView(
             city: CityDomainModel,
             onItemClickListener: ((CoordDomainModel) -> Unit)?
         ) {
             cityTextView.text = city.title
+            coordinatesTextView.text =
+                "${city.coordinates.latitude},${city.coordinates.longitude}"
             cityTextView.setOnClickListener {
                 onItemClickListener?.invoke(city.coordinates)
             }

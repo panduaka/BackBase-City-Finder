@@ -22,8 +22,7 @@ class GetCitiesUserCase(private val cityRepository: CityRepository) :
         launch {
             try {
                 val cities = cityRepository.getCities()
-                val citiesDomain: List<CityDomainModel> = cities.sortedBy { it.name }
-                    .sortedBy { it.country }.map { it.mapToUIModel() }
+                val citiesDomain: List<CityDomainModel> = filterList(cities)
                 result.postValue(Resource.Success(citiesDomain))
             } catch (exception: Exception) {
                 result.postValue(Resource.Error(exception))
@@ -34,5 +33,9 @@ class GetCitiesUserCase(private val cityRepository: CityRepository) :
 
     override fun cancel() {
         coroutineContext.cancel()
+    }
+
+    private fun filterList(cities: List<City>): List<CityDomainModel> {
+        return cities.sortedBy { it.name }.sortedBy { it.country }.map { it.mapToUIModel() }
     }
 }
