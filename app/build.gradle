@@ -80,4 +80,12 @@ dependencies {
     def nav_version = "2.5.0-alpha01"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //Test
+
+    implementation "org.jetbrains.kotlin:kotlin-test-junit:1.5.31"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0"
+    testImplementation "io.mockk:mockk:1.11.0"
+    testImplementation "io.mockk:mockk-agent-jvm:1.11.0"
+    implementation "androidx.arch.core:core-testing:2.1.0"
 }
