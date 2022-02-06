@@ -6,14 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.backbasecityfinder.R
-import com.example.backbasecityfinder.data.remote.dto.City
-import com.example.backbasecityfinder.data.remote.dto.Coord
 import com.example.backbasecityfinder.domain.model.CityDomainModel
-import com.example.backbasecityfinder.domain.model.CoordDomainModel
 
 @Suppress("ComplexMethod")
 class CityAdapter(
-    private val onItemClickListener: ((CoordDomainModel) -> Unit)? = null
+    private val onItemClickListener: ((Double, Double) -> Unit)? = null
 ) : RecyclerView.Adapter<CityAdapter.ViewHolder>() {
     var citiesList = listOf<CityDomainModel>()
         set(value) {
@@ -42,13 +39,13 @@ class CityAdapter(
 
         fun bindView(
             city: CityDomainModel,
-            onItemClickListener: ((CoordDomainModel) -> Unit)?
+            onItemClickListener: ((Double, Double) -> Unit)?
         ) {
             cityTextView.text = city.title
             coordinatesTextView.text =
-                "${city.coordinates.latitude},${city.coordinates.longitude}"
+                "${city.latitude},${city.longitude}"
             cityTextView.setOnClickListener {
-                onItemClickListener?.invoke(city.coordinates)
+                onItemClickListener?.invoke(city.latitude, city.longitude)
             }
         }
     }

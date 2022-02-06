@@ -8,9 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.backbasecityfinder.R
-import com.example.backbasecityfinder.data.remote.dto.Coord
 import com.example.backbasecityfinder.databinding.CitySearchFragmentBinding
-import com.example.backbasecityfinder.domain.model.CoordDomainModel
 
 
 class CitySearchFragment : Fragment(
@@ -23,8 +21,8 @@ class CitySearchFragment : Fragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = CitySearchFragmentBinding.bind(view)
-        adapter = CityAdapter {
-            val mapIntent = createLocationIntent(it)
+        adapter = CityAdapter { lat, lon ->
+            val mapIntent = createLocationIntent(latitude = lat, longitude = lon)
             activity?.packageManager?.let { packageManager ->
                 mapIntent.resolveActivity(packageManager)?.let {
                     startActivity(mapIntent)
@@ -66,8 +64,8 @@ class CitySearchFragment : Fragment(
         }
     }
 
-    private fun createLocationIntent(coord: CoordDomainModel): Intent {
-        val gmmIntentUri = Uri.parse("geo:${coord.latitude},${coord.longitude}")
+    private fun createLocationIntent(latitude: Double, longitude:Double): Intent {
+        val gmmIntentUri = Uri.parse("geo:${latitude},${longitude}")
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri).apply {
             setPackage("com.google.android.apps.maps")
         }
