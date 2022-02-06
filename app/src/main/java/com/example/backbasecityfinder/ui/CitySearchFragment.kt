@@ -15,7 +15,7 @@ class CitySearchFragment : Fragment(
     R.layout.city_search_fragment
 ) {
     private lateinit var binding: CitySearchFragmentBinding
-    private val sharedMainViewModel: MainViewModel by activityViewModels()
+    private val sharedMainViewModel: MainViewModel by sharedViewModel()
     private var adapter: CityAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

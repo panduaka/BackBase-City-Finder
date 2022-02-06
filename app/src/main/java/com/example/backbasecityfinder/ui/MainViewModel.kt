@@ -2,7 +2,6 @@ package com.example.backbasecityfinder.ui
 
 import androidx.lifecycle.*
 import com.example.backbasecityfinder.common.Resource
-import com.example.backbasecityfinder.data.remote.dto.City
 import com.example.backbasecityfinder.domain.interactors.GetCitiesUserCase
 import com.example.backbasecityfinder.domain.interactors.GetFilteredCitiesUserCase
 import com.example.backbasecityfinder.domain.model.CityDomainModel
@@ -48,9 +47,5 @@ class MainViewModel(
                 _cityCodeLoading.postValue(Unit)
             }
         }
-    }
-
-    fun getCityList() {
-        getCitiesUserCase.execute()
     }
 }
