@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.example.backbasecityfinder.R
 import com.example.backbasecityfinder.databinding.CitySearchFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class CitySearchFragment : Fragment(
@@ -29,6 +29,8 @@ class CitySearchFragment : Fragment(
                 }
             }
         }
+        binding.listView.addItemDecoration(CityItemDecor(dividerDrawable = resources.getDrawable(R.drawable.item_decorator)))
+
         binding.listView.adapter = adapter
 
         initListeners()
