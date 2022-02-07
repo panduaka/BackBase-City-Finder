@@ -16,11 +16,11 @@ class MainViewModel(
 
     internal val cityCode: LiveData<List<CityDomainModel>> get() = _cityCode
     internal val cityCodeFilter: LiveData<List<CityDomainModel>> get() = _cityFilterCode
-    internal val cityCodeLoading: LiveData<Unit> get() = _cityCodeLoading
+    internal val cityCodeLoading: LiveData<Boolean> get() = _cityCodeLoading
 
     private val _cityCode = MediatorLiveData<List<CityDomainModel>>()
     private val _cityFilterCode = MediatorLiveData<List<CityDomainModel>>()
-    private val _cityCodeLoading = MediatorLiveData<Unit>()
+    private val _cityCodeLoading = MediatorLiveData<Boolean>()
 
     private val cityCodeResult: LiveData<Resource<List<CityDomainModel>>> =
         Transformations.switchMap(cityCodeRequest) {
@@ -37,14 +37,14 @@ class MainViewModel(
             if (it is Resource.Success) {
                 _cityCode.postValue(it.data!!)
             } else if (it is Resource.Loading) {
-                _cityCodeLoading.postValue(Unit)
+                _cityCodeLoading.postValue(true)
             }
         }
         _cityFilterCode.addSource(cityFilterCodeResult) {
             if (it is Resource.Success) {
                 _cityFilterCode.postValue(it.data!!)
             } else if (it is Resource.Loading) {
-                _cityCodeLoading.postValue(Unit)
+                _cityCodeLoading.postValue(true)
             }
         }
     }
